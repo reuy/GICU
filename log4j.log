@@ -1,0 +1,21 @@
+[2020-01-01 22:39:03,264] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:105) - Creation of user Saito with new password.
+[2020-01-01 22:42:21,623] INFO     1[main] - bank.DBHandler.updateUser(DBHandler.java:105) - Creation of user Saito with new password.
+[2020-01-01 22:44:39,024] WARN     0[main] - bank.DBHandler.Login(DBHandler.java:76) - java.sql.SQLException: Invalid column index
+[2020-01-01 22:45:24,222] WARN     0[main] - bank.DBHandler.Login(DBHandler.java:76) - java.sql.SQLException: Invalid column index
+[2020-01-02 01:01:13,014] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
+[2020-01-02 01:01:13,085] WARN    71[main] - bank.DBHandler.updateUser(DBHandler.java:142) - [Ljava.lang.StackTraceElement;@5bf0d49
+[2020-01-02 01:02:24,619] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
+[2020-01-02 01:02:26,190] WARN  1571[main] - bank.DBHandler.updateUser(DBHandler.java:142) - java.sql.SQLSyntaxErrorException: ORA-00933: SQL command not properly ended
+
+[2020-01-02 01:05:51,374] INFO     3[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
+[2020-01-02 01:06:25,256] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
+[2020-01-02 01:08:00,305] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
+[2020-01-02 01:19:39,259] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Testy-McTesterson with new password.
+[2020-01-02 01:26:04,213] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
+[2020-01-02 01:38:39,854] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
+[2020-01-02 01:41:00,409] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
+[2020-01-02 01:42:22,586] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
+[2020-01-02 01:42:34,413] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
+[2020-01-02 01:44:39,696] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Rika Hoshiko with new password.
+[2020-01-02 01:56:41,166] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Rika Hoshiko. No password given.
+[2020-01-02 01:57:35,925] INFO 54759[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Rika Hoshiko. No password given.
