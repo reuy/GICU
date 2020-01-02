@@ -47,14 +47,14 @@ public class Console {
 			return;
 		}
 		if (CurrentUser.getStatus() == 0) {
-			System.out.println("Customer account still pending. Contact customer support at 1-800-PICKLES.");
+			System.out.println("Customer account still pending. Contact customer support at 1-800-DARK-SIDE.");
 			return;
 		}
 
 		System.out.println("Login verified. Hello, " + CurrentUser.getUsername() + "!");
 		System.out.println("Your balance is " + CurrentUser.getBalance());
 		ArrayList<Transfer> transfers = CurrentUser.pendingTransfers;
-		
+
 		if (transfers.size() > 0) {
 			System.out.println("You have " + transfers.size() + " pending money transfers!");
 		}
@@ -76,7 +76,7 @@ public class Console {
 			} else if (input.equals("Quit")) {
 				break;
 			} else {
-			System.out.println("Invalid command.");
+				System.out.println("Invalid command.");
 			}
 		}
 
@@ -99,17 +99,16 @@ public class Console {
 			}
 		}
 
-			Handler.updateUser(CurrentUser, null);
-			// Add a verification function here later
-			System.out.println("Your new balance is " + CurrentUser.getBalance());
-		
+		Handler.updateUser(CurrentUser, null);
+		// Add a verification function here later
+		System.out.println("Your new balance is " + CurrentUser.getBalance());
+
 	}
 
 	private static void SendConsole() {
 		System.out.println("Thank you for choosing " + bankName);
 		System.out.println("Please enter name of person to send money to:");
-		
-		
+
 		String value = scanner.nextLine();
 		TargetUser = Handler.viewUser(value);
 		if (TargetUser == null) {
@@ -118,26 +117,27 @@ public class Console {
 		} else {
 			System.out.println("Please enter amount of money:");
 			int sendvalue = scanner.nextInt();
-			
-			//Block invalid transfers
-			if(sendvalue > CurrentUser.getBalance())
-			{System.out.println("Invalid amount specified.");
-			return;}
-			
+
+			// Block invalid transfers
+			if (sendvalue > CurrentUser.getBalance()) {
+				System.out.println("Invalid amount specified.");
+				return;
+			}
+
 			CurrentUser.setBalance(CurrentUser.getBalance() - sendvalue);
-			
+
 			Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), TargetUser.getUsername(), sendvalue);
 			CurrentUser.getPendingTransfers().add(NewTransfer);
 			System.out.println("Transfer Registered!");
 			Handler.updateUser(CurrentUser, null);
-			}
+		}
 	}
 
 	private static void defaultConsole() {
 		System.out.println("Appropriate commands are...");
 		System.out.println("Register [Username] [Password],");
 		System.out.println("Manage [Username] [Password],");
-		System.out.println("Login [Username] [Password],");
+		System.out.println("Login [Username] [Password]");
 		return;
 	}
 
@@ -149,7 +149,7 @@ public class Console {
 			return;
 		}
 		if (CurrentUser.getStatus() != 2) {
-			System.out.println("You don't work here. Get a job.");
+			System.out.println("You don't work here. Apply to join the GICU at www.Order66.com.");
 			return;
 		}
 
@@ -191,13 +191,11 @@ public class Console {
 				System.out.println("This user can be approved. Would you like to? Y/N");
 			} else if (TargetUser.getStatus() == 1) {
 				System.out.println("This user can be promoted to employee. Would you like to? Y/N");
-				
+
 			} else {
 				return;
 			}
-			
-			
-			
+
 			while (true) {
 				value = scanner.nextLine();
 				if (value.equals("Y") || value.equals("y")) {
@@ -208,13 +206,10 @@ public class Console {
 				} else if (value.equals("N") || value.equals("N")) {
 					return;
 				} else {
-					
+
 				}
 			}
-			
-			
-			
-			
+
 		}
 
 	}
