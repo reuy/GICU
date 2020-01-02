@@ -19,3 +19,31 @@
 [2020-01-02 01:44:39,696] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Rika Hoshiko with new password.
 [2020-01-02 01:56:41,166] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Rika Hoshiko. No password given.
 [2020-01-02 01:57:35,925] INFO 54759[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Rika Hoshiko. No password given.
+[2020-01-02 03:49:40,035] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
+[2020-01-02 04:56:33,994] WARN     0[main] - bank.DBHandler.getTransfers(DBHandler.java:213) - WARNING: Caught java.sql.SQLException: Missing IN or OUT parameter at index:: 1.
+[Ljava.lang.StackTraceElement;@2b71e916
+[2020-01-02 04:59:37,110] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 04:59:37,812] WARN   702[main] - bank.DBHandler.updateTransfers(DBHandler.java:268) - WARNING: Caught java.sql.SQLException: Missing IN or OUT parameter at index:: 1.
+[Ljava.lang.StackTraceElement;@75d4a5c2
+[2020-01-02 05:03:11,371] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:03:11,534] INFO   163[main] - bank.DBHandler.updateTransfers(DBHandler.java:236) - Regular Update of transfer with id -1
+[2020-01-02 05:03:11,581] WARN   210[main] - bank.DBHandler.updateTransfers(DBHandler.java:269) - WARNING: Caught java.sql.SQLSyntaxErrorException: ORA-01747: invalid user.table.column, table.column, or column specification
+.
+[Ljava.lang.StackTraceElement;@22555ebf
+[2020-01-02 05:06:16,800] INFO     2[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:07:06,727] INFO 49929[main] - bank.DBHandler.updateTransfers(DBHandler.java:236) - Regular Update of transfer with id -1
+[2020-01-02 05:08:08,327] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:10:39,894] INFO     1[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:11:39,144] INFO 59251[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
+[2020-01-02 05:12:14,553] WARN 94660[main] - bank.DBHandler.updateTransfers(DBHandler.java:269) - WARNING: Caught java.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("SYSTEM"."TRANSFERLIST"."TRANSFERID")
+.
+[Ljava.lang.StackTraceElement;@1506f20f
+[2020-01-02 05:15:09,734] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:15:41,709] INFO 31975[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
+[2020-01-02 05:16:31,286] WARN 81552[main] - bank.DBHandler.updateTransfers(DBHandler.java:269) - WARNING: Caught java.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("SYSTEM"."TRANSFERLIST"."TRANSFERID")
+.
+[Ljava.lang.StackTraceElement;@1506f20f
+[2020-01-02 05:33:01,731] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:33:01,923] INFO   192[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
+[2020-01-02 05:35:14,784] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
+[2020-01-02 05:35:14,938] INFO   154[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.

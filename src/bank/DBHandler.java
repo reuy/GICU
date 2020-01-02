@@ -3,6 +3,7 @@ package bank;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.omg.CORBA.Current;
 
 import java.sql.*;
 
@@ -68,11 +69,12 @@ public class DBHandler implements DBInterface {
 			DBstmt.setInt(2, password.hashCode() % 99999999);
 
 			DBrslt = DBstmt.executeQuery();
-			
-			if(!DBrslt.next())
-			return null;
-			
-			User user = new User(DBrslt.getInt("Status"), DBrslt.getString("Username"), DBrslt.getInt("Balance")); 
+
+			if (!DBrslt.next())
+				return null;
+
+			User user = new User(DBrslt.getInt("Status"), DBrslt.getString("Username"), DBrslt.getInt("Balance"));
+			user.setPendingTransfers(getTransfers(user.username));
 			return user;
 		} catch (RuntimeException e) {
 			throw e;
@@ -137,48 +139,12 @@ public class DBHandler implements DBInterface {
 				DBstmt.setString(3, user.getUsername());
 			}
 			DBstmt.execute();
+			
+			updateTransfers(user.pendingTransfers);
+			
 
 		} catch (SQLException e) {
 			log.warn(e);
-		} finally {
-			closeConnection();
-		}
-	}
-
-	@Override
-	public ArrayList<Transfer> getTransfers(String Username) {
-		try {
-
-			/* Get transfers for both incoming and outgoing transfers. */
-			ArrayList<Transfer> List = new ArrayList<Transfer>();
-
-			/* Populate the given list with incoming transfers involving the user */
-			String sql = "SELECT * FROM TransferList WHERE STATUS < 0 AND (Recipient= ? OR Sender= ? )";
-			DBstmt = DBconn.prepareStatement(sql);
-			DBstmt.setString(1, Username);
-			DBstmt.setString(2, Username);
-			DBstmt = DBconn.prepareStatement(sql);
-			DBrslt = DBstmt.executeQuery();
-
-			// Run through the list
-			while (DBrslt.next()) {
-				Transfer New = new Transfer();
-				New.setId(DBrslt.getInt("TRANSFERID"));
-				New.setAmount(DBrslt.getInt("AMOUNT"));
-				New.setDate(DBrslt.getDate("TIME"));
-				New.setRecipient(DBrslt.getString("Recipient"));
-				New.setSender(DBrslt.getString("Sender"));
-				log.debug("Inserted new transfer into database:\n	" + New);
-				List.add(New);
-			}
-
-			return null;
-		} catch (RuntimeException e) {
-			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
-			return null;
-		} catch (SQLException e) {
-			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
-			return null;
 		} finally {
 			closeConnection();
 		}
@@ -194,11 +160,11 @@ public class DBHandler implements DBInterface {
 			DBstmt.setString(1, Username);
 
 			DBrslt = DBstmt.executeQuery();
-			
-			if(!DBrslt.next())
-			return null;
-			
-			User user = new User(DBrslt.getInt("Balance"), DBrslt.getString("Username"), DBrslt.getInt("Status")); 
+
+			if (!DBrslt.next())
+				return null;
+
+			User user = new User(DBrslt.getInt("Balance"), DBrslt.getString("Username"), DBrslt.getInt("Status"));
 			return user;
 		} catch (RuntimeException e) {
 			throw e;
@@ -209,13 +175,102 @@ public class DBHandler implements DBInterface {
 		} finally {
 			closeConnection();
 		}
-
 	}
 
+	@Override
+	public ArrayList<Transfer> getTransfers(String Username) {
+		try {
+			initializeConnection();
+
+			/* Get transfers for both incoming and outgoing transfers. */
+			ArrayList<Transfer> List = new ArrayList<Transfer>();
+
+			/* Populate the given list with incoming transfers involving the user */
+			String sql = "SELECT * FROM TransferList WHERE STATUS < 0 AND (Recipient= ? OR Sender= ? )";
+			DBstmt = DBconn.prepareStatement(sql);
+			DBstmt.setString(1, Username);
+			DBstmt.setString(2, Username);
+			DBrslt = DBstmt.executeQuery();
+
+			// Run through the list
+			while (DBrslt.next()) {
+				Transfer New = new Transfer();
+				New.setId(DBrslt.getInt("TRANSFERID"));
+				New.setAmount(DBrslt.getInt("AMOUNT"));
+				New.setTime(DBrslt.getTime("TIME"));
+				New.setRecipient(DBrslt.getString("Recipient"));
+				New.setSender(DBrslt.getString("Sender"));
+				log.debug("Retrieved transfer from database:\n	" + New);
+				List.add(New);
+			}
+
+			return List;
+		} catch (RuntimeException e) {
+			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
+			return null;
+		} catch (SQLException e) {
+			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
+			return null;
+		} finally {
+			closeConnection();
+		}
+	}
 
 	@Override
-	public void updateTransfers(ArrayList<Transfer> transferManifest) {
-		// TODO Auto-generated method stub
+	public void updateTransfers(ArrayList<Transfer> List) {
+		try {
+			initializeConnection();
+
+			// For each element of the given list...
+			for (Transfer current : List) {
+				
+				// Check if the ID of the transfer exists
+				String sql = "SELECT * FROM TransferList WHERE TransferID = ? )";/*
+				DBstmt = DBconn.prepareStatement(sql);
+				DBstmt.setInt(1, current.getId());
+				DBstmt = DBconn.prepareStatement(sql);
+				DBrslt = DBstmt.executeQuery();*/
+
+				//If so, prepare an update statement
+				if (current.getId() != -1) {
+					log.info("Regular Update of transfer with id " + current.getId());
+
+					sql = "Update TransferList SET Status = ?, Recipient = ?, Sender = ?, Amount =?, Time = ?, WHERE TransferID = ? ";
+					DBstmt = DBconn.prepareStatement(sql);
+
+					DBstmt.setInt(1, current.getStatus());
+					DBstmt.setString(2, current.getRecipient());
+					DBstmt.setString(3, current.getSender());
+					DBstmt.setInt(4, current.getAmount());
+					DBstmt.setTime(5, current.getTime());
+					DBstmt.setInt(6, current.getId());
+				} else {
+					//Otherwise, create a new item
+					
+					log.info("Creation of new Transfer.");
+					sql = "insert into TransferList(Status, Recipient, Sender, Amount, Time) VALUES (?, ?, ?, ?, ?)";
+					DBstmt = DBconn.prepareStatement(sql);
+					DBstmt.setInt(1, current.getStatus());
+					DBstmt.setString(2, current.getRecipient());
+					DBstmt.setString(3, current.getSender());
+					DBstmt.setInt(4, current.getAmount());
+					DBstmt.setTime(5, current.getTime());
+				}
+				
+				//Activate query
+				DBstmt.execute();
+			}
+
+			return;
+		} catch (RuntimeException e) {
+			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
+			return;
+		} catch (SQLException e) {
+			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
+			return;
+		} finally {
+			closeConnection();
+		}
 
 	}
 

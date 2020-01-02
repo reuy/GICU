@@ -52,34 +52,32 @@ public class Console {
 		}
 
 		System.out.println("Login verified. Hello, " + CurrentUser.getUsername() + "!");
+		
 		ArrayList<Transfer> transfers = CurrentUser.pendingTransfers;
-		/*
+		
 		if (transfers.size() > 0) {
 			System.out.println("You have " + transfers.size() + " pending money transfers!");
-		}*/
+		}
 
 		String input = "";
 		while (true) {
-			System.out.println("Commands: Withdraw, Deposit, Transfer, Quit");
+			System.out.println("Commands: Withdraw, Deposit, Send, Quit");
 			input = scanner.nextLine();
 
 			if (input.equals("Withdraw")) {
 				BalanceConsole(false);
 				continue;
-			}
-			if (input.equals("Deposit")) {
+			} else if (input.equals("Deposit")) {
 				BalanceConsole(true);
 				continue;
-			}
-			if (input.equals("Transfer")) {
-				TransferConsole();
+			} else if (input.equals("Send")) {
+				SendConsole();
 				continue;
-			}
-			if (input.equals("Quit")) {
+			} else if (input.equals("Quit")) {
 				break;
-			}
+			} else {
 			System.out.println("Invalid command.");
-
+			}
 		}
 
 	}
@@ -107,8 +105,32 @@ public class Console {
 		
 	}
 
-	private static void TransferConsole() {
+	private static void SendConsole() {
 		System.out.println("Thank you for choosing " + bankName);
+		System.out.println("Please enter name of person to send money to:");
+		
+		
+		String value = scanner.nextLine();
+		TargetUser = Handler.viewUser(value);
+		if (TargetUser == null) {
+			System.out.println("User not found.");
+			return;
+		} else {
+			System.out.println("Please enter amount of money:");
+			int sendvalue = scanner.nextInt();
+			
+			//Block invalid transfers
+			if(sendvalue > CurrentUser.getBalance())
+			{System.out.println("Invalid amount specified.");
+			return;}
+			
+			CurrentUser.setBalance(CurrentUser.getBalance() - sendvalue);
+			
+			Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), TargetUser.getUsername(), sendvalue);
+			CurrentUser.getPendingTransfers().add(NewTransfer);
+			System.out.println("Transfer Registered!");
+			Handler.updateUser(CurrentUser, null);
+			}
 	}
 
 	private static void defaultConsole() {
@@ -159,15 +181,15 @@ public class Console {
 		System.out.println("Please enter name of user to view:");
 
 		String value = scanner.nextLine();
-		User target = Handler.viewUser(value);
-		if (target == null) {
+		TargetUser = Handler.viewUser(value);
+		if (TargetUser == null) {
 			System.out.println("User not found.");
 			return;
 		} else {
-			System.out.println(target);
-			if (target.getStatus() == 0) {
+			System.out.println(TargetUser);
+			if (TargetUser.getStatus() == 0) {
 				System.out.println("This user can be approved. Would you like to? Y/N");
-			} else if (target.getStatus() == 1) {
+			} else if (TargetUser.getStatus() == 1) {
 				System.out.println("This user can be promoted to employee. Would you like to? Y/N");
 				
 			} else {
@@ -179,9 +201,9 @@ public class Console {
 			while (true) {
 				value = scanner.nextLine();
 				if (value.equals("Y") || value.equals("y")) {
-					target.setStatus(target.getStatus() + 1);
+					TargetUser.setStatus(TargetUser.getStatus() + 1);
 					System.out.println("User status promoted.");
-					Handler.updateUser(target, null);
+					Handler.updateUser(TargetUser, null);
 					return;
 				} else if (value.equals("N") || value.equals("N")) {
 					return;

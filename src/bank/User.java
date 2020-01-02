@@ -27,6 +27,7 @@ public class User {
 		this.status = status;
 		this.username = username;
 		this.balance = balance;
+		pendingTransfers = new ArrayList<Transfer>();
 	}
 	
 
@@ -83,4 +84,25 @@ public class User {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+
+
+
+
+
+
+	
+	public ArrayList<Transfer> getPendingTransfers() {
+		return pendingTransfers;
+	}
+
+
+
+
+
+
+	public void setPendingTransfers(ArrayList<Transfer> pendingTransfers) {
+		this.pendingTransfers = pendingTransfers;
+	}
+
+
 }
