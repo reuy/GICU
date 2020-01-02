@@ -116,7 +116,7 @@ public class DBHandler implements DBInterface {
 
 			} else if (password != null) {
 				// 2) User exists with a given password, UPDATE user
-				log.info("Special Update of user " + user.getUsername() + "with new password.");
+				log.debug("Special Update of user " + user.getUsername() + "with new password.");
 
 				sql = "Update UserList SET PasswordHash = ?, Balance = ?, Status = ? WHERE Username = ?";
 				DBstmt = DBconn.prepareStatement(sql);
