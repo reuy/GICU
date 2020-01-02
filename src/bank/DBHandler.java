@@ -3,8 +3,6 @@ package bank;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
-import org.omg.CORBA.Current;
-
 import java.sql.*;
 
 public class DBHandler implements DBInterface {
@@ -108,7 +106,7 @@ public class DBHandler implements DBInterface {
 
 			// 1) No user exists - CREATE new user
 			if (!DBrslt.next() && password != null) {
-				log.info("Creation of user " + user.getUsername() + " with new password.");
+				log.debug("Creation of user " + user.getUsername() + " with new password.");
 				sql = "insert into UserList(Username, PasswordHash, Balance, Status) VALUES (?, ?, ?, ?)";
 				DBstmt = DBconn.prepareStatement(sql);
 				DBstmt.setString(1, user.getUsername());
@@ -129,7 +127,7 @@ public class DBHandler implements DBInterface {
 				DBstmt.setString(4, user.getUsername());
 			} else {
 				// 2) User exists with no given password, UPDATE user
-				log.info("Regular Update of user " + user.getUsername() + ". No password given.");
+				log.debug("Regular Update of user " + user.getUsername() + ". No password given.");
 
 				sql = "Update UserList SET Balance = ?, Status = ? WHERE Username = ? ";
 				DBstmt = DBconn.prepareStatement(sql);

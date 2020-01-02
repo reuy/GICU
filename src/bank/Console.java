@@ -52,7 +52,7 @@ public class Console {
 		}
 
 		System.out.println("Login verified. Hello, " + CurrentUser.getUsername() + "!");
-		
+		System.out.println("Your balance is " + CurrentUser.getBalance());
 		ArrayList<Transfer> transfers = CurrentUser.pendingTransfers;
 		
 		if (transfers.size() > 0) {
@@ -149,7 +149,7 @@ public class Console {
 			return;
 		}
 		if (CurrentUser.getStatus() != 2) {
-			System.out.println("You don't work here. Get a job somewhere else.");
+			System.out.println("You don't work here. Get a job.");
 			return;
 		}
 

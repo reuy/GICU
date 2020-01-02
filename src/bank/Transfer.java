@@ -1,6 +1,5 @@
 package bank;
 
-import java.sql.Date;
 import java.sql.Time;
 
 public class Transfer {
