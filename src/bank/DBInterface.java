@@ -9,6 +9,7 @@ import java.util.ArrayList;
 //Set of functions expected by whatever program will implement the database.
 public interface DBInterface {
 	
+	
 	/*
 	 * Returns a User Object associated with a given username and password, complete with a list of all transfers.
 	 * First, Hash the given password. Look up the given username, match it with the
@@ -31,19 +32,19 @@ public interface DBInterface {
 	public abstract User viewUser(String Username);
 
 	/*
-	 * Passwords or their hashes are never stored in the User Object - they are
-	 * strictly database-side. Hash the given password, look up the username, and
-	 * overwrite the given password.
-	 */
-
-	public abstract User setPassword(String Username, String Password);
-	
-	/*
-	 * Like updateUser, but also sets the password of that user. 
+	 * Updates the matching user in the Database to match the given user
+	 * Password will also be hashed and set.
 	 * Don't forget to update the transfers, as that's a separate database.
 	 * Used primarily to create new accounts
 	 */
-	public abstract void updateUser(User user, String Password);
+	public abstract void updateDBUser(User user, String Password);
+	
+	/*
+	 * Updates the given user to match the matching user in the database.
+	 * Don't forget to get the transfers, as that's a separate database.
+	 * Used primarily to create new accounts
+	 */
+	public abstract void updateLocalUser(User user);
 
 	/*
 	 * Use userID as an SQL lookup key for all pending transfers, as both sender and
@@ -53,6 +54,12 @@ public interface DBInterface {
 	 * If it's above zero, create an arrayList and populate it.
 	 */
 	public abstract ArrayList<Transfer> getTransfers(String Username);
+	
+	/* 
+	 * Returns all transfers
+	 * If it's above zero, create an arrayList and populate it.
+	 */
+	public abstract ArrayList<Transfer> getTransfers();
 	
 	/*
 	 * Uploads the transfer manifest back to the database, updating all matching ids and inserting new ones.

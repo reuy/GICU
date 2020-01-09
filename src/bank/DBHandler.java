@@ -87,13 +87,7 @@ public class DBHandler implements DBInterface {
 	}
 
 	@Override
-	public User setPassword(String Username, String Password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateUser(User user, String password) {
+	public void updateDBUser(User user, String password) {
 
 		try {
 			initializeConnection();
@@ -148,6 +142,14 @@ public class DBHandler implements DBInterface {
 		}
 	}
 
+	public void updateLocalUser(User user) {
+		User update = viewUser(user.username);
+		
+		user.setBalance(update.getBalance());
+		user.setPendingTransfers(update.getPendingTransfers());
+		user.setStatus(update.getStatus());
+	}
+	
 	@Override
 	public User viewUser(String Username) {
 		try {
@@ -162,7 +164,7 @@ public class DBHandler implements DBInterface {
 			if (!DBrslt.next())
 				return null;
 
-			User user = new User(DBrslt.getInt("Balance"), DBrslt.getString("Username"), DBrslt.getInt("Status"));
+			User user = new User(DBrslt.getInt("Status"), DBrslt.getString("Username"), DBrslt.getInt("Balance"));
 			return user;
 		} catch (RuntimeException e) {
 			throw e;
@@ -184,7 +186,7 @@ public class DBHandler implements DBInterface {
 			ArrayList<Transfer> List = new ArrayList<Transfer>();
 
 			/* Populate the given list with incoming transfers involving the user */
-			String sql = "SELECT * FROM TransferList WHERE STATUS < 0 AND (Recipient= ? OR Sender= ? )";
+			String sql = "SELECT * FROM TransferList WHERE Recipient= ? OR Sender= ?";
 			DBstmt = DBconn.prepareStatement(sql);
 			DBstmt.setString(1, Username);
 			DBstmt.setString(2, Username);
@@ -223,14 +225,14 @@ public class DBHandler implements DBInterface {
 			for (Transfer current : List) {
 				
 				// Check if the ID of the transfer exists
-				String sql = "SELECT * FROM TransferList WHERE TransferID = ? )";/*
+				String sql = "SELECT * FROM TransferList WHERE TransferID = ? ";/*
 				DBstmt = DBconn.prepareStatement(sql);
 				DBstmt.setInt(1, current.getId());
 				DBstmt = DBconn.prepareStatement(sql);
 				DBrslt = DBstmt.executeQuery();*/
 
 				//If so, prepare an update statement
-				if (current.getId() != -1) {
+				if (current.getId()!= -1) {
 					log.info("Regular Update of transfer with id " + current.getId());
 
 					sql = "Update TransferList SET Status = ?, Recipient = ?, Sender = ?, Amount =?, Time = ?, WHERE TransferID = ? ";
@@ -270,6 +272,43 @@ public class DBHandler implements DBInterface {
 			closeConnection();
 		}
 
+	}
+
+	@Override
+	public ArrayList<Transfer> getTransfers() {
+		try {
+			initializeConnection();
+
+			/* Get transfers for both incoming and outgoing transfers. */
+			ArrayList<Transfer> List = new ArrayList<Transfer>();
+
+			/* Populate the given list with incoming transfers involving the user */
+			String sql = "SELECT * FROM TransferList";
+			DBstmt = DBconn.prepareStatement(sql);
+			DBrslt = DBstmt.executeQuery();
+
+			// Run through the list
+			while (DBrslt.next()) {
+				Transfer New = new Transfer();
+				New.setId(DBrslt.getInt("TRANSFERID"));
+				New.setAmount(DBrslt.getInt("AMOUNT"));
+				New.setTime(DBrslt.getTime("TIME"));
+				New.setRecipient(DBrslt.getString("Recipient"));
+				New.setSender(DBrslt.getString("Sender"));
+				log.debug("Retrieved transfer from database:\n	" + New);
+				List.add(New);
+			}
+
+			return List;
+		} catch (RuntimeException e) {
+			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
+			return null;
+		} catch (SQLException e) {
+			log.warn("WARNING: Caught " + e.toString() + ".\n" + e.getStackTrace());
+			return null;
+		} finally {
+			closeConnection();
+		}
 	}
 
 }

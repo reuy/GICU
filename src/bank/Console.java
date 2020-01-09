@@ -3,6 +3,7 @@ package bank;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.apache.log4j.*;
+import bank.util.*;
 
 public class Console {
 	static Logger log = Logger.getLogger(Console.class);
@@ -53,7 +54,7 @@ public class Console {
 
 		System.out.println("Login verified. Hello, " + CurrentUser.getUsername() + "!");
 		System.out.println("Your balance is " + CurrentUser.getBalance());
-		ArrayList<Transfer> transfers = CurrentUser.pendingTransfers;
+		ArrayList<Transfer> transfers = BankUtil.filterTransfers(CurrentUser.pendingTransfers, CurrentUser.username, (byte) 2);
 
 		if (transfers.size() > 0) {
 			System.out.println("You have " + transfers.size() + " pending money transfers!");
@@ -85,28 +86,40 @@ public class Console {
 	private static void BalanceConsole(boolean Deposit) {
 		System.out.println("Your balance is " + CurrentUser.getBalance());
 		System.out.println("Please enter amount:");
+	
 
 		int value = scanner.nextInt();
-		if (Deposit == true) {
+		
+		Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), value);
+		NewTransfer.setStatus(3);
+		if (Deposit == true && value > 0) {
 			System.out.println("Depositing " + value);
-			CurrentUser.setBalance(CurrentUser.getBalance() + value);
+
+			
+			CurrentUser.getPendingTransfers().add(NewTransfer);
+			//DISABLED: Let DB handle actual changing of money
+			//CurrentUser.setBalance(CurrentUser.getBalance() + value);
 		} else {
-			if (value < CurrentUser.getBalance()) {
+			if (value > 0 && value < CurrentUser.getBalance()) {
 				System.out.println("Withdrawing " + value);
-				CurrentUser.setBalance(CurrentUser.getBalance() - value);
+				NewTransfer.setAmount(-value);
+				CurrentUser.getPendingTransfers().add(NewTransfer);
+				//DISABLED: Let DB handle actual changing of money
+				//CurrentUser.setBalance(CurrentUser.getBalance() - value);
 			} else {
 				System.out.println("INVALID AMOUNT.");
 			}
 		}
 
-		Handler.updateUser(CurrentUser, null);
+		Handler.updateDBUser(CurrentUser, null);
+		Handler.updateLocalUser(CurrentUser);
 		// Add a verification function here later
 		System.out.println("Your new balance is " + CurrentUser.getBalance());
-
 	}
 
 	private static void SendConsole() {
-		System.out.println("Thank you for choosing " + bankName);
+
+		System.out.println("Your balance is " + CurrentUser.getBalance());
 		System.out.println("Please enter name of person to send money to:");
 
 		String value = scanner.nextLine();
@@ -126,10 +139,10 @@ public class Console {
 
 			CurrentUser.setBalance(CurrentUser.getBalance() - sendvalue);
 
-			Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), TargetUser.getUsername(), sendvalue);
+			Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), TargetUser.getUsername(), sendvalue, -1);
 			CurrentUser.getPendingTransfers().add(NewTransfer);
 			System.out.println("Transfer Registered!");
-			Handler.updateUser(CurrentUser, null);
+			Handler.updateDBUser(CurrentUser, null);
 		}
 	}
 
@@ -201,7 +214,7 @@ public class Console {
 				if (value.equals("Y") || value.equals("y")) {
 					TargetUser.setStatus(TargetUser.getStatus() + 1);
 					System.out.println("User status promoted.");
-					Handler.updateUser(TargetUser, null);
+					Handler.updateDBUser(TargetUser, null);
 					return;
 				} else if (value.equals("N") || value.equals("N")) {
 					return;
@@ -215,7 +228,7 @@ public class Console {
 	}
 
 	private static void LogViewer() {
-		ArrayList<Transfer> Logs = Handler.getTransfers(null);
+		ArrayList<Transfer> Logs = Handler.getTransfers();
 
 		System.out.println("Displaying all transactions");
 		System.out.print(Logs);
@@ -223,7 +236,7 @@ public class Console {
 
 	private static void registerConsole(String Username, String Password) {
 		CurrentUser = new User(0, Username, 0);
-		Handler.updateUser(CurrentUser, Password);
+		Handler.updateDBUser(CurrentUser, Password);
 		System.out.println("New User " + Username + " created!");
 		System.out.println("Please wait for approval.");
 		return;
