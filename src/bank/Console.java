@@ -3,6 +3,8 @@ package bank;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.apache.log4j.*;
+
+import bank.DBAccess.*;
 import bank.util.*;
 
 public class Console {
@@ -10,10 +12,10 @@ public class Console {
 	final static String bankName = "Galactic Imperial Credit Union";
 	final static String moraleMessage = "Remember, we own you!";
 	// Passwords should be hashed serverside.
-	static User CurrentUser;
-	static User TargetUser;
+
 	static DBInterface Handler;
 	static Scanner scanner;
+	static User CurrentUser;
 
 	public static void main(String[] args) {
 
@@ -42,19 +44,17 @@ public class Console {
 
 	private static void customerConsole(String Username, String Password) {
 
-		CurrentUser = Handler.Login(Username, Password, false);
-		if (CurrentUser == null) {
-			System.out.println("Customer account not found.");
-			return;
-		}
-		if (CurrentUser.getStatus() == 0) {
-			System.out.println("Customer account still pending. Contact customer support at 1-800-DARK-SIDE.");
+		try {
+		Handler.Login(Username, Password, false); 
+		CurrentUser = Handler.getUser(Username);
+		} catch (DBAccessException e) {
+			System.out.print(e);
 			return;
 		}
 
 		System.out.println("Login verified. Hello, " + CurrentUser.getUsername() + "!");
 		System.out.println("Your balance is " + CurrentUser.getBalance());
-		ArrayList<Transfer> transfers = BankUtil.filterTransfers(CurrentUser.pendingTransfers, CurrentUser.username, (byte) 2);
+		ArrayList<Transfer> transfers = Handler.getPendingTransactions();
 
 		if (transfers.size() > 0) {
 			System.out.println("You have " + transfers.size() + " pending money transfers!");
@@ -63,7 +63,7 @@ public class Console {
 		String input = "";
 		while (true) {
 			System.out.println("Commands: Withdraw, Deposit, Send, Quit");
-			input = scanner.nextLine();
+			input = scanner.next();
 
 			if (input.equals("Withdraw")) {
 				BalanceConsole(false);
@@ -84,66 +84,51 @@ public class Console {
 	}
 
 	private static void BalanceConsole(boolean Deposit) {
-		System.out.println("Your balance is " + CurrentUser.getBalance());
+		System.out.println("Your balance is " + Handler.getUser().getBalance());
 		System.out.println("Please enter amount:");
 	
 
 		int value = scanner.nextInt();
-		
-		Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), value);
-		NewTransfer.setStatus(3);
 		if (Deposit == true && value > 0) {
 			System.out.println("Depositing " + value);
 
-			
-			CurrentUser.getPendingTransfers().add(NewTransfer);
+			Handler.Deposit(value);
+			//CurrentUser.getPendingTransfers().add(NewTransfer);
 			//DISABLED: Let DB handle actual changing of money
 			//CurrentUser.setBalance(CurrentUser.getBalance() + value);
 		} else {
-			if (value > 0 && value < CurrentUser.getBalance()) {
+			if (value > 0 && value < Handler.getUser().getBalance()) {
 				System.out.println("Withdrawing " + value);
-				NewTransfer.setAmount(-value);
-				CurrentUser.getPendingTransfers().add(NewTransfer);
+				
+				Handler.Deposit(-value);
 				//DISABLED: Let DB handle actual changing of money
 				//CurrentUser.setBalance(CurrentUser.getBalance() - value);
 			} else {
 				System.out.println("INVALID AMOUNT.");
 			}
 		}
-
-		Handler.updateDBUser(CurrentUser, null);
-		Handler.updateLocalUser(CurrentUser);
 		// Add a verification function here later
-		System.out.println("Your new balance is " + CurrentUser.getBalance());
+		System.out.println("Your new balance is " + Handler.getUser().getBalance());
 	}
 
 	private static void SendConsole() {
 
-		System.out.println("Your balance is " + CurrentUser.getBalance());
+		System.out.println("Your balance is " + Handler.getUser().getBalance());
 		System.out.println("Please enter name of person to send money to:");
 
-		String value = scanner.nextLine();
-		TargetUser = Handler.viewUser(value);
-		if (TargetUser == null) {
-			System.out.println("User not found.");
-			return;
-		} else {
+		String Targetname = scanner.nextLine();
 			System.out.println("Please enter amount of money:");
 			int sendvalue = scanner.nextInt();
 
 			// Block invalid transfers
-			if (sendvalue > CurrentUser.getBalance()) {
+			if (sendvalue > Handler.getUser().getBalance()) {
 				System.out.println("Invalid amount specified.");
 				return;
 			}
-
-			CurrentUser.setBalance(CurrentUser.getBalance() - sendvalue);
-
-			Transfer NewTransfer = new Transfer(CurrentUser.getUsername(), TargetUser.getUsername(), sendvalue, -1);
-			CurrentUser.getPendingTransfers().add(NewTransfer);
+			
+			Handler.Transfer(sendvalue, Targetname);
 			System.out.println("Transfer Registered!");
-			Handler.updateDBUser(CurrentUser, null);
-		}
+		
 	}
 
 	private static void defaultConsole() {
@@ -156,17 +141,14 @@ public class Console {
 
 	private static void managementConsole(String Username, String Password) {
 
-		CurrentUser = Handler.Login(Username, Password, true);
-		if (CurrentUser == null) {
-			System.out.println("Employee account not found.");
-			return;
-		}
-		if (CurrentUser.getStatus() != 2) {
-			System.out.println("You don't work here. Apply to join the GICU at www.Order66.com.");
+		try {
+		Handler.Login(Username, Password, true);
+		} catch (DBAccessException e) {
+			System.out.println(e);
 			return;
 		}
 
-		System.out.println("Login verified. Hello, " + CurrentUser.getUsername() + "!");
+		System.out.println("Login verified. Hello, " + Handler.getUser().getUsername() + "!");
 		System.out.println(moraleMessage);
 
 		String input = "";
@@ -194,7 +176,7 @@ public class Console {
 		System.out.println("Please enter name of user to view:");
 
 		String value = scanner.nextLine();
-		TargetUser = Handler.viewUser(value);
+		User TargetUser = Handler.getUser(value);
 		if (TargetUser == null) {
 			System.out.println("User not found.");
 			return;
@@ -212,9 +194,8 @@ public class Console {
 			while (true) {
 				value = scanner.nextLine();
 				if (value.equals("Y") || value.equals("y")) {
-					TargetUser.setStatus(TargetUser.getStatus() + 1);
+					Handler.promoteUser(TargetUser.getUsername());
 					System.out.println("User status promoted.");
-					Handler.updateDBUser(TargetUser, null);
 					return;
 				} else if (value.equals("N") || value.equals("N")) {
 					return;
@@ -228,15 +209,14 @@ public class Console {
 	}
 
 	private static void LogViewer() {
-		ArrayList<Transfer> Logs = Handler.getTransfers();
+		ArrayList<Transfer> Logs = Handler.getLogs(null);
 
 		System.out.println("Displaying all transactions");
 		System.out.print(Logs);
 	}
 
 	private static void registerConsole(String Username, String Password) {
-		CurrentUser = new User(0, Username, 0);
-		Handler.updateDBUser(CurrentUser, Password);
+		Handler.RegisterUser(Username, Password);
 		System.out.println("New User " + Username + " created!");
 		System.out.println("Please wait for approval.");
 		return;

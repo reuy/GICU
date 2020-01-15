@@ -27,17 +27,17 @@ public class BankUtil {
 				iter.remove();
 				continue;
 			}
-			if (current.getSender() != Username && current.getRecipient() != Username) {
+			if (!current.getSender().equals(Username) && !current.getRecipient().equals(Username)) {
 				iter.remove();
 				continue;
 			}
 
-			if (mode == 1 && current.getSender() != Username) {
+			if (mode == 1 && !current.getSender().equals(Username)) {
 				iter.remove();
 				continue;
 			}
 
-			if (mode == 2 && current.getRecipient() != Username) {
+			if (mode == 2 && !current.getRecipient().equals(Username)) {
 				iter.remove();
 				continue;
 			}

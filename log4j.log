@@ -1,128 +1,28 @@
-[2020-01-01 22:39:03,264] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:105) - Creation of user Saito with new password.
-[2020-01-01 22:42:21,623] INFO     1[main] - bank.DBHandler.updateUser(DBHandler.java:105) - Creation of user Saito with new password.
-[2020-01-01 22:44:39,024] WARN     0[main] - bank.DBHandler.Login(DBHandler.java:76) - java.sql.SQLException: Invalid column index
-[2020-01-01 22:45:24,222] WARN     0[main] - bank.DBHandler.Login(DBHandler.java:76) - java.sql.SQLException: Invalid column index
-[2020-01-02 01:01:13,014] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
-[2020-01-02 01:01:13,085] WARN    71[main] - bank.DBHandler.updateUser(DBHandler.java:142) - [Ljava.lang.StackTraceElement;@5bf0d49
-[2020-01-02 01:02:24,619] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
-[2020-01-02 01:02:26,190] WARN  1571[main] - bank.DBHandler.updateUser(DBHandler.java:142) - java.sql.SQLSyntaxErrorException: ORA-00933: SQL command not properly ended
-
-[2020-01-02 01:05:51,374] INFO     3[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
-[2020-01-02 01:06:25,256] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
-[2020-01-02 01:08:00,305] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
-[2020-01-02 01:19:39,259] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Testy-McTesterson with new password.
-[2020-01-02 01:26:04,213] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
-[2020-01-02 01:38:39,854] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
-[2020-01-02 01:41:00,409] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
-[2020-01-02 01:42:22,586] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
-[2020-01-02 01:42:34,413] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Testy-McTestersonwith new password.
-[2020-01-02 01:44:39,696] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Rika Hoshiko with new password.
-[2020-01-02 01:56:41,166] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Rika Hoshiko. No password given.
-[2020-01-02 01:57:35,925] INFO 54759[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Rika Hoshiko. No password given.
-[2020-01-02 03:49:40,035] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Saito. No password given.
-[2020-01-02 04:56:33,994] WARN     0[main] - bank.DBHandler.getTransfers(DBHandler.java:213) - WARNING: Caught java.sql.SQLException: Missing IN or OUT parameter at index:: 1.
-[Ljava.lang.StackTraceElement;@2b71e916
-[2020-01-02 04:59:37,110] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 04:59:37,812] WARN   702[main] - bank.DBHandler.updateTransfers(DBHandler.java:268) - WARNING: Caught java.sql.SQLException: Missing IN or OUT parameter at index:: 1.
-[Ljava.lang.StackTraceElement;@75d4a5c2
-[2020-01-02 05:03:11,371] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:03:11,534] INFO   163[main] - bank.DBHandler.updateTransfers(DBHandler.java:236) - Regular Update of transfer with id -1
-[2020-01-02 05:03:11,581] WARN   210[main] - bank.DBHandler.updateTransfers(DBHandler.java:269) - WARNING: Caught java.sql.SQLSyntaxErrorException: ORA-01747: invalid user.table.column, table.column, or column specification
-.
-[Ljava.lang.StackTraceElement;@22555ebf
-[2020-01-02 05:06:16,800] INFO     2[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:07:06,727] INFO 49929[main] - bank.DBHandler.updateTransfers(DBHandler.java:236) - Regular Update of transfer with id -1
-[2020-01-02 05:08:08,327] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:10:39,894] INFO     1[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:11:39,144] INFO 59251[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-02 05:12:14,553] WARN 94660[main] - bank.DBHandler.updateTransfers(DBHandler.java:269) - WARNING: Caught java.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("SYSTEM"."TRANSFERLIST"."TRANSFERID")
-.
-[Ljava.lang.StackTraceElement;@1506f20f
-[2020-01-02 05:15:09,734] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:15:41,709] INFO 31975[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-02 05:16:31,286] WARN 81552[main] - bank.DBHandler.updateTransfers(DBHandler.java:269) - WARNING: Caught java.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("SYSTEM"."TRANSFERLIST"."TRANSFERID")
-.
-[Ljava.lang.StackTraceElement;@1506f20f
-[2020-01-02 05:33:01,731] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:33:01,923] INFO   192[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-02 05:35:14,784] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 05:35:14,938] INFO   154[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-02 09:40:27,308] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 09:40:27,426] INFO   118[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-02 09:52:06,447] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:132) - Regular Update of user Saito. No password given.
-[2020-01-02 09:53:48,188] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:111) - Creation of user Milo with new password.
-[2020-01-02 09:59:29,241] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Milo with new password.
-[2020-01-02 10:02:14,065] INFO     0[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Milowith new password.
-[2020-01-02 10:20:06,746]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Milo. No password given.
-[2020-01-02 10:21:04,706]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Milo with new password.
-[2020-01-02 10:21:49,463]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Milo. No password given.
-[2020-01-02 10:22:06,138]DEBUG     1[main] - bank.DBHandler.updateUser(DBHandler.java:119) - Special Update of user Milowith new password.
-[2020-01-02 10:22:44,824]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Palpatine with new password.
-[2020-01-02 10:23:22,161]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 10:23:31,722]DEBUG  9561[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 10:23:50,310]DEBUG     1[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:21:10,491]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:21:47,702]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:22:02,867]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:27:43,185]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:27:49,126]DEBUG  5941[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:27:56,106]DEBUG 12921[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:29:10,407]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:29:16,606]DEBUG  6199[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:32:04,810]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Vader with new password.
-[2020-01-02 11:34:04,212]DEBUG     1[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:34:15,828]DEBUG 11617[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:34:32,037]DEBUG 27826[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Palpatine. No password given.
-[2020-01-02 11:34:32,110] INFO 27899[main] - bank.DBHandler.updateTransfers(DBHandler.java:248) - Creation of new Transfer.
-[2020-01-02 11:49:49,113]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Vader. No password given.
-[2020-01-02 11:50:59,787]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Vader. No password given.
-[2020-01-02 12:02:48,133]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Vader. No password given.
-[2020-01-02 12:06:52,202]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:109) - Creation of user Vader with new password.
-[2020-01-02 12:07:30,875]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Vader. No password given.
-[2020-01-02 12:10:10,829]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:130) - Regular Update of user Vader. No password given.
-[2020-01-09 14:28:29,708]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:196) - Retrieved transfer from database:
-	Transaction #4: Palpatine sends 10000 to Saito on 11:34:31. STATUS CODE: 1
-[2020-01-09 14:29:47,331]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:103) - Creation of user Palpatine with new password.
-[2020-01-09 14:29:55,989]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:196) - Retrieved transfer from database:
-	Transaction #4: Palpatine sends 10000 to Saito on 11:34:31. STATUS CODE: 1
-[2020-01-09 14:33:18,557]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:196) - Retrieved transfer from database:
-	Transaction #4: Palpatine sends 10000 to Saito on 11:34:31. STATUS CODE: 1
-[2020-01-09 15:17:35,174]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:196) - Retrieved transfer from database:
-	Transaction #4: Palpatine sends 10000 to Saito on 11:34:31. STATUS CODE: 1
-[2020-01-09 15:18:26,366]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:196) - Retrieved transfer from database:
-	Transaction #4: Palpatine sends 10000 to Saito on 11:34:31. STATUS CODE: 1
-[2020-01-09 15:18:32,947]DEBUG  6581[main] - bank.DBHandler.updateUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 15:18:33,068] INFO  6702[main] - bank.DBHandler.updateTransfers(DBHandler.java:229) - Regular Update of transfer with id 1
-[2020-01-09 15:18:33,096] WARN  6730[main] - bank.DBHandler.updateTransfers(DBHandler.java:262) - WARNING: Caught java.sql.SQLSyntaxErrorException: ORA-01747: invalid user.table.column, table.column, or column specification
-.
-[Ljava.lang.StackTraceElement;@206a70ef
-[2020-01-09 15:19:16,238]DEBUG 49872[main] - bank.DBHandler.updateUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 15:19:16,305] INFO 49939[main] - bank.DBHandler.updateTransfers(DBHandler.java:229) - Regular Update of transfer with id 1
-[2020-01-09 15:19:16,307] WARN 49941[main] - bank.DBHandler.updateTransfers(DBHandler.java:262) - WARNING: Caught java.sql.SQLSyntaxErrorException: ORA-01747: invalid user.table.column, table.column, or column specification
-.
-[Ljava.lang.StackTraceElement;@3c41ed1d
-[2020-01-09 15:20:10,600]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:196) - Retrieved transfer from database:
-	Transaction #4: Palpatine sends 10000 to Saito on 11:34:31. STATUS CODE: 1
-[2020-01-09 16:10:22,593]DEBUG     0[main] - bank.DBHandler.updateUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 16:10:22,660] INFO    67[main] - bank.DBHandler.updateTransfers(DBHandler.java:242) - Creation of new Transfer.
-[2020-01-09 16:29:25,834]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:203) - Retrieved transfer from database:
-	Transaction #21: Palpatine sends 10000 to Palpatine on 16:10:22. STATUS CODE: 1
-[2020-01-09 16:32:24,851]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:203) - Retrieved transfer from database:
-	Transaction #21: Palpatine sends 10000 to Palpatine on 16:10:22. STATUS CODE: 1
-[2020-01-09 16:35:01,780]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:203) - Retrieved transfer from database:
-	Transaction #21: Palpatine sends 10000 to Palpatine on 16:10:22. STATUS CODE: 1
-[2020-01-09 16:35:16,712]DEBUG 14932[main] - bank.DBHandler.updateDBUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 16:35:16,820] INFO 15040[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-09 16:35:23,244]DEBUG 21464[main] - bank.DBHandler.updateDBUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 16:35:23,338] INFO 21558[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-09 16:36:09,063]DEBUG     0[main] - bank.DBHandler.getTransfers(DBHandler.java:203) - Retrieved transfer from database:
-	Transaction #23: Palpatine sends -10000 to Palpatine on 16:35:23. STATUS CODE: 1
-[2020-01-09 16:36:09,068]DEBUG     5[main] - bank.DBHandler.getTransfers(DBHandler.java:203) - Retrieved transfer from database:
-	Transaction #21: Palpatine sends 10000 to Palpatine on 16:10:22. STATUS CODE: 1
-[2020-01-09 16:36:09,068]DEBUG     5[main] - bank.DBHandler.getTransfers(DBHandler.java:203) - Retrieved transfer from database:
-	Transaction #22: Palpatine sends 10000 to Palpatine on 16:35:16. STATUS CODE: 1
-[2020-01-09 16:36:25,926]DEBUG 16863[main] - bank.DBHandler.updateDBUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 16:36:26,000] INFO 16937[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-09 16:36:33,245]DEBUG 24182[main] - bank.DBHandler.updateDBUser(DBHandler.java:124) - Regular Update of user Palpatine. No password given.
-[2020-01-09 16:36:33,308] INFO 24245[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
-[2020-01-09 16:36:33,310] INFO 24247[main] - bank.DBHandler.updateTransfers(DBHandler.java:250) - Creation of new Transfer.
+[2020-01-14 21:23:11,619]DEBUG  4303[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #207: Testy-McTestedson sends 1337 to Testy-McTestedson on 21:23:09. STATUS CODE: 0
+[2020-01-14 21:23:11,620]DEBUG  4304[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #208: Testy-McTestedson sends 1337 to Testy-McTesterson on 21:23:10. STATUS CODE: 0
+[2020-01-14 21:23:11,782]DEBUG  4466[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #194: Testy-McTesterson sends -1337 to Testy-McTesterson on 21:15:59. STATUS CODE: 0
+[2020-01-14 21:23:11,783]DEBUG  4467[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #196: Testy-McTestedson sends 1337 to Testy-McTesterson on 21:16:01. STATUS CODE: 0
+[2020-01-14 21:23:11,783]DEBUG  4467[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #197: Testy-McTesterson sends 1337 to Testy-McTesterson on 21:19:25. STATUS CODE: 0
+[2020-01-14 21:23:11,783]DEBUG  4467[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #198: Testy-McTesterson sends -1337 to Testy-McTesterson on 21:19:25. STATUS CODE: 0
+[2020-01-14 21:23:11,783]DEBUG  4467[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #200: Testy-McTestedson sends 1337 to Testy-McTesterson on 21:19:26. STATUS CODE: 0
+[2020-01-14 21:23:11,784]DEBUG  4468[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #201: Testy-McTesterson sends 1337 to Testy-McTesterson on 21:21:11. STATUS CODE: 0
+[2020-01-14 21:23:11,784]DEBUG  4468[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #202: Testy-McTesterson sends -1337 to Testy-McTesterson on 21:21:12. STATUS CODE: 0
+[2020-01-14 21:23:11,784]DEBUG  4468[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #204: Testy-McTestedson sends 1337 to Testy-McTesterson on 21:21:12. STATUS CODE: 0
+[2020-01-14 21:23:11,784]DEBUG  4468[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #205: Testy-McTesterson sends 1337 to Testy-McTesterson on 21:23:08. STATUS CODE: 0
+[2020-01-14 21:23:11,785]DEBUG  4469[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #206: Testy-McTesterson sends -1337 to Testy-McTesterson on 21:23:09. STATUS CODE: 0
+[2020-01-14 21:23:11,785]DEBUG  4469[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #208: Testy-McTestedson sends 1337 to Testy-McTesterson on 21:23:10. STATUS CODE: 0
+[2020-01-14 21:23:11,786]DEBUG  4470[main] - bank.DBAccess.DBHandler.getTransfers(DBHandler.java:223) - Retrieved transfer from database:
+	Transaction #193: Testy-McTesterson sends 1337 to Testy-McTesterson on 21:15:58. STATUS CODE: 0
