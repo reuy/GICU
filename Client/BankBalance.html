@@ -1,0 +1,82 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
+
+  <meta charset="utf-8">
+
+  <title>Galactic Imperial Credit Union</title>
+  <meta name="description" content="This Description should be modified">
+  <meta name="author" content="Saito">
+  
+	<!-- Include Bootstrap before all other css -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet"> 
+	
+
+	
+	
+
+  <link rel="stylesheet" href="Avalon.css">
+</head>
+
+<body class="d-flex flex-column vh-100"><!-- Webpage Code -->
+
+<Header>
+  <nav class="navbar navbar-expand-sm bg-light">
+  
+  <div class="nav navbar-brand text-center justify-content-start pb-0" style="width:min-content;">
+  <img src="Galactic-Empire-Logo.png" style="min-width: 5%; max-width: 100%; height: auto;">
+  <h1 class="brand mb-0">GICU</h2>
+  </div>
+
+  
+	<ul class="navbar-nav justify-content-start">
+		<li class="nav-item">
+			<a class="nav-link active disabled" href="#">Home</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Account</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" style="display:none;" href="#">Manage</a>
+		</li>
+	</ul>
+	
+	<div>
+  </div>
+	
+<ul class="navbar-nav ml-auto" id="LoginPrompt" style="border:solid;">
+    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <button class="btn" type="submit" id="LoginButton" method="POST">Sign in</button>
+	<button class="btn" type="submit" id="NewAccountButton" method="POST">Sign up</button>
+</ul>
+ </nav>
+  </Header>
+<main class="d-flex h-100">
+	<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div id="balance-panel" class="container"></div>
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  
+
+</main>
+</body>
+
+	<!-- Include Jquery(Full), Popper, and Bootstrap, in that order -->
+    <script src="scripts/jquery-3.4.1.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<!-- Included Jquery, Popper, and Bootstrap, in that order -->
+	
+	
+	<script src="scripts/BankLogin.js"></script>
+</html>

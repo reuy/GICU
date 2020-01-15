@@ -1,0 +1,43 @@
+@font-face {
+    font-family: Airborne;
+    src: url(airborne.ttf);
+}
+
+@font-face {
+    font-family: Agency;
+    src: url(AGENCYR.TTF);
+}
+
+body {	background-image: url("Gradient.jpg");
+}
+
+* {
+	font-family: "Agency";
+	font-size: 30px;
+
+}
+
+h1 {
+	font-family: "Airborne";
+	font-size: 60px;
+}
+
+.navbar {
+	display: table;
+	margin:0px;
+	text-align:left;
+  border:solid;
+  top: 0;
+  left:0;
+  width: 100%;
+}
+
+.navbar *{
+	display: table-cell;
+	background-color: red;
+	top: 50%;
+}
+
+.navbar * *{
+	margin:3px;
+}

@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'airborne';
+  font-style: normal;
+  font-weight: normal;
+  src: url("airborne.ttf") format("ttf"),
+  src: url("airborne.woff") format("woff");
+}
+@font-face {
+  font-family: 'Planer';
+  font-style: normal;
+  font-weight: bold;
+  src: url("Planer_Reg.ttf") format("ttf"),
+  src: url("Planer_Reg.woff") format("woff");
+}
+
+main {
+  background: #030202;
+  background-image: url("DeathStar_BG1.jpg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+* {font-family: "Titillium Web";
+font-size: 14;
+  color: #EEEEEE;
+  }
+  
+h1 {
+  font-family: "Airborne";
+  text-shadow: 0 0 5px #FFFFFF;
+  font-size: 40px;
+  color: #EEEEEE;
+}
+
+.brand{
+	text-shadow: 0 0 5px #111111;
+  font-size: 20px;
+  
+  text-shadow: 0 0 0px #FFFFFF;
+  color: #000000;
+}
+h2 {
+	font-family: 'Titillium Web', sans-serif;
+  font-size: 20px;
+  color: #EEEEEE;
+}
+
+
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+@media only screen and (min-device-width: 400px) {
+    main {
+        background-image: url('Space_Background_Mobile.png');
+    }
+}
